@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+
+    <link href="./css/reporter.css" rel="stylesheet">
+    <!--引入echart-->
+    <script src="./js/prepare/echart.js"></script>
+    <!--调用jquery的javascript-->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    
+    
+</head>
+
+<body>
+
+    <div id="weather-container">
+        <div id="search">
+            <div id="input-container">
+                <span class="text">省份：</span>
+                <input type="text" placeholder="省" value="江苏" class="input" id="province">
+                <span class="text">城市：</span>
+                <input type="text" placeholder="市" value="南京" class="input" id="city" name="city">
+                <button class="button" id="btn">天气查询</button>
+            </div>
+        </div>
+        
+        <div id="output">
+            <h3>查询城市天气</h3>
+            <ul id="box"></ul>
+            <h3>未来七天的天气</h3>
+            <ul id="hours"></ul>
+        </div>
+
+        <div id="card">
+            <h3>所在地天气</h3>
+            <iframe scrolling="no" src="https://tianqiapi.com/api.php?style=tz&skin=pitaya" frameborder="0" width="100%" height="50" allowtransparency="true"></iframe>
+        </div>
+
+    </div>
+    
+    <!--调用api&显示天气-->
+    <div id="weather-forecast">
+        <div id="weather"></div>
+        <script src="./js/reporter.js"></script>
+    </div>
+   
+</body>
+
+</html>

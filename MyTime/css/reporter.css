@@ -1,0 +1,44 @@
+#search{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
+    position: relative;
+    background-color: rgba(0, 0, 255, 0.164);
+}
+
+.input{
+    margin-right: 0;
+    height: 20px;
+    border-radius: 10px;
+}
+
+
+
+.text{
+    color:brown;
+    font-size: 16px;
+}
+
+.button{
+    color: blue;
+    border-radius: 10px;
+    background-color: bisque;
+    border: 0;
+}
+
+#weather{
+    width: 1000px;
+    height: 600px;
+    position: relative;
+    margin-right: 100px;
+}
+
+#card{
+   float: right;
+   margin-right: 50px;
+}
+
+body{
+    background-color: aliceblue;
+}
