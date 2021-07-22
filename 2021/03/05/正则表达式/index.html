@@ -1,0 +1,1906 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="正则表达式, 陈鑫扬的第一个hexo博客">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>正则表达式 | 陈鑫扬的第一个hexo博客</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.3.0"><link rel="stylesheet" href="/css/prism-dark.css" type="text/css"></head>
+
+
+
+    <style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },2500); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+</script>
+
+ 
+
+
+
+<body>
+
+    
+        <div id="loading-container">
+             <p class="loading-text">嘘~  正在从服务器偷取页面 . . . </p> 
+             <div class="loading-image">
+                 <div></div>
+                 <div></div>
+                 <div></div>
+                 <div></div> 
+                 <div></div>
+             </div>
+        </div>
+    
+
+    
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">陈鑫扬的第一个hexo博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">陈鑫扬的第一个hexo博客</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/ChenXinYang621/ChenXinYang621.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/ChenXinYang621/ChenXinYang621.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">正则表达式</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/php/">
+                                <span class="chip bg-color">php</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%90%8E%E7%AB%AF/" class="post-category">
+                                后端
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-03-05
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2021-03-13
+                </div>
+                
+
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>本文章的内容，援引自<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zery/p/3438845.html">某博客</a></p>
+<br/>
+
+<h3 id="一-前言"><a href="#一-前言" class="headerlink" title="一 前言"></a>一 前言</h3><br/>
+
+<p>　　对于正则表达式，相信很多人都知道，但是很多人的第一感觉就是难学，因为看第一眼时，觉得完全没有规律可寻，而且全是一堆各种各样的特殊符号，完全不知所云。</p>
+<p>其实只是对正则不了解而以，了解了你就会发现，原来就这样啊正则所用的相关字符其实不多，也不难记，更不难懂，唯一难的就是组合起来之后，可读性比较差，而且不容易理解，本文旨在让大家对正则有一个基本的了解，能看得懂简单的正则表达式，写得出简单的正则表达式，用以满足日常开发中的需求即可。</p>
+<p>0\d{2}-\d{8}|0\d{3}-\d{7} 先来一段正则，如果你对正则不了解，是不是完全不知道这一串字符是什么意思？这不要紧文章会详细解释每个字符的含义的。</p>
+ <br/>
+
+<p><strong>1.1 什么是正则表达式</strong></p>
+<br/>
+
+<p>   正则表达式是一种特殊的字符串模式，用于匹配一组字符串，就好比用模具做产品，而正则就是这个模具，定义一种规则去匹配符合规则的字符。</p>
+<br/>
+
+<p><strong>1.2 常用的正则匹配工具</strong> </p>
+<br/>
+
+<p>   在线匹配工具：</p>
+<p>　1 <a target="_blank" rel="noopener" href="http://www.regexpal.com/">http://www.regexpal.com/</a> </p>
+<p>   2 <a target="_blank" rel="noopener" href="http://rubular.com/">http://rubular.com/</a> </p>
+<p>   正则匹配软件</p>
+<p>   <a target="_blank" rel="noopener" href="http://pan.baidu.com/s/19Yn49">McTracer</a> </p>
+<p>   用过几个之后还是觉得这个是最好用的，支持将正则导成对应的语言如java C# js等还帮你转义了，Copy直接用就行了很方便，另外支持把正则表达式用法解释，如哪一段是捕获分组，哪段是贪婪匹配等等，总之用起来 So Happy .</p>
+ <br/>
+
+<h3 id="二-正则字符简单介绍"><a href="#二-正则字符简单介绍" class="headerlink" title="二 正则字符简单介绍"></a>二 正则字符简单介绍</h3><br/>
+
+<p><strong>2.1 元字符介绍</strong></p>
+<br/>
+
+<p>  <strong>“^”</strong> ：^会匹配行或者字符串的起始位置，有时还会匹配整个文档的起始位置。 </p>
+<p>  <strong>“$”</strong> ：$会匹配行或字符串的结尾</p>
+<br/>
+
+<p>​     而且被匹配的字符必须是以This开头有空格也不行，必须以Regex结尾，也不能有空格与其它字符</p>
+<p><img src="https://images0.cnblogs.com/blog/366784/201311/23112422-56df0ef3f54c42abb55e7cabd5278824.png" alt="img">   <img src="https://images0.cnblogs.com/blog/366784/201311/23112601-f5e9f5c0ddd7417eb28ac7d0734f8b8f.png" alt="img"></p>
+ <br/>
+
+
+
+<p> <strong>“\b”</strong> :不会消耗任何字符只匹配一个位置，常用于匹配单词边界 如 我想从字符串中”This is Regex”匹配单独的单词 “is” 正则就要写成 “\bis\b”  </p>
+<p>　　  \b 不会匹配is 两边的字符，但它会识别is 两边是否为单词的边界 </p>
+<p> <strong>“\d”</strong>: 匹配数字，</p>
+<p>　　  例如要匹配一个固定格式的电话号码以0开头前4位后7位，如0737-5686123  正则:^0\d\d\d-\d\d\d\d\d\d\d$ 这里只是为了介绍”\d”字符，实际上有更好的写法会在   下面介绍。</p>
+<p> **”\w”**：匹配字母，数字，下划线.</p>
+<p>　　  例如我要匹配”a2345BCD__TTz” 正则：”\w+”  这里的”+”字符为一个量词指重复的次数，稍后会详细介绍。</p>
+<p> **”\s”**：匹配空格 </p>
+<p>　　  例如字符 “a b c” 正则：”\w\s\w\s\w”  一个字符后跟一个空格，如有字符间有多个空格直接把”\s” 写成 “\s+” 让空格重复</p>
+<p> **”.”**：匹配除了换行符以外的任何字符</p>
+<p>　　  这个算是”\w”的加强版了”\w”不能匹配 空格 如果把字符串加上空格用”\w”就受限了，看下用 “.”是如何匹配字符”a23 4 5 B C D__TTz”  正则：”.+”</p>
+<p> <strong>“[abc]”</strong>: 字符组  匹配包含括号内元素的字符 </p>
+<p>​    这个比较简单了只匹配括号内存在的字符，还可以写成[a-z]匹配a至z的所以字母就等于可以用来控制只能输入英文了，</p>
+ <br/>
+
+<p><strong>2.2 几种反义</strong></p>
+<br/>
+
+<p>　　<strong>写法很简单改成大写就行了，意思与原来的相反，这里就不举例子了</strong></p>
+<p>  <strong>“\W”</strong> 匹配任意不是字母，数字，下划线 的字符</p>
+<p>  <strong>“\S”</strong>  匹配任意不是空白符的字符</p>
+<p>　<strong>“\D”</strong> 匹配任意非数字的字符</p>
+<p>  <strong>“\B”</strong> 匹配不是单词开头或结束的位置</p>
+<p>  <strong>“[^abc]”</strong> 匹配除了abc以外的任意字符</p>
+ <br/>
+
+<p> <strong>2.3  量词</strong></p>
+<br/>
+
+<p>　　先解释关于量词所涉及到的重要的三个概念</p>
+<p>  贪婪(贪心) 如”*”字符 贪婪量词会首先匹配整个字符串，尝试匹配时，它会选定尽可能多的内容，如果 失败则回退一个字符，然后再次尝试回退的过程就叫做回溯，它会每次回退一个字符，直到找到匹配的内容或者没有字符可以回退。相比下面两种贪婪量词对资源的消耗是最大的，</p>
+<p>  懒惰(勉强) 如 “?”  懒惰量词使用另一种方式匹配，它从目标的起始位置开始尝试匹配，每次检查一个字符，并寻找它要匹配的内容，如此循环直到字符结尾处。</p>
+<p>  占有  如”+” 占有量词会覆盖事个目标字符串，然后尝试寻找匹配内容 ，但它只尝试一次，不会回溯，就好比先抓一把石头，然后从石头中挑出黄金</p>
+<br/>
+
+<p>   <strong>“*“(贪婪)</strong>  <strong>重复零次或更多</strong></p>
+<p>　　　  例如”aaaaaaaa” 匹配字符串中所有的a  正则： “a*”  会出到所有的字符”a”</p>
+<br/>
+
+<p>   <strong>“+”(懒惰)</strong>  <strong>重复一次或更多次</strong></p>
+<p>　　   例如”aaaaaaaa” 匹配字符串中所有的a  正则： “a+”  会取到字符中所有的a字符，  “a+”与”a*”不同在于”+”至少是一次而”*” 可以是0次，</p>
+<p>　　   稍后会与”?”字符结合来体现这种区别</p>
+<br/>
+
+<p>   <strong>“?”(占有)</strong>  重复零次或一次</p>
+<p>　　   例如”aaaaaaaa” 匹配字符串中的a 正则 ： “a?” 只会匹配一次，也就是结果只是单个字符a</p>
+<br/>
+
+<p>　  <strong>“{n}”</strong> 重复n次</p>
+<p>　　   例如从”aaaaaaaa” 匹配字符串的a 并重复3次 正则：  “a{3}”  结果就是取到3个a字符  “aaa”;</p>
+<br/>
+
+<p>　  <strong>“{n,m}”</strong> 重复n到m次</p>
+<p>　　   例如正则 “a{3,4}” 将a重复匹配3次或者4次 所以供匹配的字符可以是三个”aaa”也可以是四个”aaaa” 正则都可以匹配到</p>
+<br/>
+
+<p>   <strong>“{n,}”</strong> 重复n次或更多次</p>
+<p> 　   与{n,m}不同之处就在于匹配的次数将没有上限，但至少要重复n次 如 正则”a{3,}” a至少要重复3次</p>
+<p> 把量词了解了之后之前匹配电话号码的正则现在就可以改得简单点了^0\d\d\d-\d\d\d\d\d\d\d$ 可以改为”^0\d+-\d{7}$”。</p>
+<p>这样写还不够完美如果因为前面的区号没有做限定，以至于可以输入很多们，而通常只能是3位或者4位，</p>
+<p>现在再改一下 “^0\d{2,3}-\d{7}”如此一来区号部分就可以匹配3位或者4位的了</p>
+<br/>
+
+<p> <strong>2.4 懒惰限定符</strong></p>
+<p>　　<strong>“*?”</strong>  重复任意次，但尽可能少重复 </p>
+<p>　　   如 “acbacb”  正则  “a.*?b” 只会取到第一个”acb” 原本可以全部取到但加了限定符后，只会匹配尽可能少的字符 ，而”acbacb”最少字符的结果就是”acb” </p>
+<p>　　<strong>“+?”</strong> 重复1次或更多次，但尽可能少重复</p>
+<p>　　  与上面一样，只是至少要重复1次</p>
+<p>　　<strong>“??”</strong> 重复0次或1次，但尽可能少重复</p>
+<p>　　   如 “aaacb” 正则 “a.??b” 只会取到最后的三个字符”acb”</p>
+<p>　　<strong>“{n,m}?”</strong> 重复n到m次，但尽可能少重复</p>
+<p>​     如 “aaaaaaaa”  正则 “a{0,m}” 因为最少是0次所以取到结果为空</p>
+<p>　　<strong>“{n,}?”</strong>   重复n次以上，但尽可能少重复</p>
+<p>​     如 “aaaaaaa”  正则 “a{1,}” 最少是1次所以取到结果为 “a”</p>
+ <br/>
+
+<h3 id="三-正则进阶"><a href="#三-正则进阶" class="headerlink" title="三  正则进阶"></a>三  正则进阶</h3><br/>
+
+<p>   <strong>3.1 捕获分组</strong></p>
+<p>　　先了解在正则中捕获分组的概念，其实就是一个括号内的内容 如 “(\d)\d” 而”(\d)” 这就是一个捕获分组，可以对捕获分组进行 后向引用 (如果后而有相同的内容则可以直接引用前面定义的捕获组，以简化表达式) 如(\d)\d\1 这里的”\1”就是对”(\d)”的后向引用</p>
+<p>那捕获分组有什么用呢看个例子就知道了</p>
+<p>如  “zery zery” 正则 \b(\w+)\b\s\1\b 所以这里的”\1”所捕获到的字符也是 与(\w+)一样的”zery”，为了让组名更有意义，组名是可以自定义名字的</p>
+<p>“\b(?<name>\w+)\b\s\k<name>\b” 用”?<name>“就可以自定义组名了而要后向引用组时要记得写成 “\k<name>“;自定义组名后,捕获组中匹配到的值就会保存在定义的组名里</p>
+<p>下面列出捕获分组常有的用法</p>
+ <br/>
+
+<p><strong>“(exp)”</strong>   匹配exp,并捕获文本到自动命名的组里</p>
+<p><strong>“(?<name>exp)”</strong>  匹配exp,并捕获文本到名称为name的组里</p>
+<p><strong>“(?:exp)”</strong> 匹配exp,不捕获匹配的文本，也不给此分组分配组号</p>
+<p>以下为零宽断言</p>
+<p><strong>“(?=exp)”</strong> 匹配exp前面的位置</p>
+<p>　　如 “How are you doing” 正则”(?<txt>.+(?=ing))” 这里取ing前所有的字符，并定义了一个捕获分组名字为 “txt” 而”txt”这个组里的值为”How are you do”;</p>
+<p><strong>“(?&lt;=exp)”</strong> 匹配exp后面的位置</p>
+<p>　　如 “How are you doing” 正则”(?<txt>(?&lt;=How).+)” 这里取”How”之后所有的字符，并定义了一个捕获分组名字为 “txt” 而”txt”这个组里的值为” are you doing”;</p>
+<p><strong>“(?!exp)”</strong> 匹配后面跟的不是exp的位置</p>
+<p>　　如 “123abc” 正则 “\d{3}(?!\d)”匹配3位数字后非数字的结果</p>
+<p><strong>“(?&lt;!exp)”</strong> 匹配前面不是exp的位置</p>
+<p>　　如 “abc123 “ 正则 “(?&lt;![0-9])123” 匹配”123”前面是非数字的结果也可写成”(?!&lt;\d)123”</p>
+ <br/>
+
+<h3 id="四-正则实战"><a href="#四-正则实战" class="headerlink" title="四  正则实战"></a>四  正则实战</h3><br/>
+
+<p>　　正则在做验证，与数据过滤时体现的威力是巨大的，我想用过的朋友都知道，下面我们把刚刚了解的全部结合起来做一次实战 做数据采集用正则过滤Html标签并取相应的数据</p>
+<p>我们的战场就选在博客园吧，假设现在要采集博客园首页的所有文章信息 包括文章标题，链接接 作者博客地址，文章简介，文章发布时间，阅读数据，评论数 ，推荐数。</p>
+ <br/>
+
+<p>先看博客园文章的Html格式</p>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>post_item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>digg<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>diggit<span class="token punctuation">"</span></span> <span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>DiggIt(3439076,120879,1)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>diggnum<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>digg_count_3439076<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>clear<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>    
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>digg_tip_3439076<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>digg_tip<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>      
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>post_item_body<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>titlelnk<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.cnblogs.com/swq6413/p/3439076.html<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>分享完整的项目工程目录结构<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>                   
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>post_item_summary<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.cnblogs.com/swq6413/<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>48<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>48<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>pfs<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://pic.cnitblog.com/face/142964/20131116170946.png<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">/></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>    在项目开发过程中，如何有序的保存项目中的各类数据文件，建立一个分类清晰、方便管理的目录结构是非常重要的。 综合以前的项目和一些朋友的项目结构，我整理了一份我觉得还不错的项目目录结构。 在这里分享给大家，欢迎各位提出你宝贵的意见和建议。如果喜欢请“推荐”则个，感激万分！！ 整个目录设置到4级子目录，实... 
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>              
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>post_item_foot<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>                    
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.cnblogs.com/swq6413/<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>lightblue<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>七少爷<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span> 
+    发布于 2013-11-23 15:48 
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>article_comment<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.cnblogs.com/swq6413/p/3439076.html#commentform<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>2013-11-23 16:40<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>gray<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        评论(4)<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>article_view<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.cnblogs.com/swq6413/p/3439076.html<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>gray<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>阅读(206)<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>clear<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ <br/>
+
+<p> 通过构造一个Http请求来取到数据并对数据进行相应处理得到关键信息，在过滤Html标签取文章时正则的强大的威力就体现出来了，</p>
+<p>正则的知识点也都基本用上了比如 “\s \w+ . * ? “还有捕获分组，零宽断言等等。喜欢的朋友可以试一试，然后自己看如何通过正则取相应数据的，代码中的正则都是很基本简单的，其意思与用法都在上文中详细写了。</p>
+ <br/>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class Program
+&#123;
+    static void Main(string[] args)
+    &#123;
+     
+        string content &#x3D; HttpUtility.HttpGetHtml();
+        HttpUtility.GetArticles(content);
+    &#125;
+&#125;
+
+internal class HttpUtility
+&#123;
+    &#x2F;&#x2F;默认获取第一页数据
+    public static string HttpGetHtml()
+    &#123;
+        HttpWebRequest request &#x3D; (HttpWebRequest)WebRequest.Create(&quot;http:&#x2F;&#x2F;www.cnblogs.com&#x2F;&quot;);
+        request.Accept &#x3D; &quot;text&#x2F;plain, *&#x2F;*; q&#x3D;0.01&quot;;
+        request.Method &#x3D; &quot;GET&quot;;
+        request.Headers.Add(&quot;Accept-Language&quot;, &quot;zh-cn,zh;q&#x3D;0.8,en-us;q&#x3D;0.5,en;q&#x3D;0.3&quot;);
+        request.ContentLength &#x3D; 0;
+       
+        request.Host &#x3D; &quot;www.cnblogs.com&quot;;
+        request.UserAgent &#x3D; &quot;Mozilla&#x2F;5.0 (Windows NT 6.1) AppleWebKit&#x2F;537.1 (KHTML, like Gecko) Maxthon&#x2F;4.1.3.5000 Chrome&#x2F;26.0.1410.43 Safari&#x2F;537.1&quot;;
+        HttpWebResponse response &#x3D; (HttpWebResponse)request.GetResponse();
+        Stream responStream &#x3D; response.GetResponseStream();
+        StreamReader reader &#x3D; new StreamReader(responStream, Encoding.UTF8);
+        string content &#x3D; reader.ReadToEnd();
+        return content;
+
+    &#125;
+
+    public static List&lt;Article&gt; GetArticles(string htmlString)
+    &#123;
+        List&lt;Article&gt; articleList &#x3D; new List&lt;Article&gt;();
+        Regex regex &#x3D; null;
+        Article article &#x3D; null;
+        regex &#x3D; new Regex(&quot;&lt;div class&#x3D;\&quot;post_item\&quot;&gt;(?&lt;content&gt;.*?)(?&#x3D;&lt;div class&#x3D;\&quot;clear\&quot;&gt;&quot; + @&quot;&lt;&#x2F;div&gt;\s*&lt;&#x2F;div&gt;)&quot;,
+                          RegexOptions.Singleline);
+
+        if (regex.IsMatch(htmlString))
+        &#123;
+            MatchCollection aritcles &#x3D; regex.Matches(htmlString);
+
+            foreach (Match item in aritcles)
+            &#123;
+                article &#x3D; new Article();
+                &#x2F;&#x2F;取推荐
+                regex &#x3D;
+                    new Regex(
+                        &quot;&lt;div class&#x3D;\&quot;digg\&quot;&gt;.*&lt;span.*&gt;(?&lt;digNum&gt;.*)&quot; + @&quot;&lt;&#x2F;span&gt;&quot; +
+                        &quot;.*&lt;div class&#x3D;\&quot;post_item_body\&quot;&gt;&quot;, RegexOptions.Singleline);
+                article.DiggNum &#x3D; regex.Match(item.Value).Groups[&quot;digNum&quot;].Value;
+
+                &#x2F;&#x2F;取文章标题 需要去除转义字符
+                regex &#x3D; new Regex(&quot;&lt;h3&gt;(?&lt;a&gt;.*)&lt;&#x2F;h3&gt;&quot;, RegexOptions.Singleline);
+                string a &#x3D; regex.Match(item.Value).Groups[&quot;a&quot;].Value;
+                regex &#x3D; new Regex(&quot;&lt;a\\s.*href&#x3D;\&quot;(?&lt;href&gt;.*?)\&quot;.*&gt;(?&lt;summary&gt;.*)&lt;&#x2F;a&gt;&quot;, RegexOptions.Singleline);
+                article.AritcleUrl &#x3D; regex.Match(a).Groups[&quot;href&quot;].Value;
+                article.AritcleTitle &#x3D; regex.Match(a).Groups[&quot;summary&quot;].Value;
+
+                &#x2F;&#x2F;取作者图片 
+                regex &#x3D; new Regex(&quot;&lt;a.*&gt;(?&lt;img&gt;&lt;img[^&gt;].*&gt;)&lt;&#x2F;a&gt;&quot;, RegexOptions.Singleline);
+                article.AuthorImg &#x3D; regex.Match(item.Value).Groups[&quot;img&quot;].Value;
+
+                &#x2F;&#x2F;取作者博客URL及链接的target属性
+                regex &#x3D; new Regex(&quot;&lt;a\\s*?href&#x3D;\&quot;(?&lt;href&gt;.*)\&quot;\\s*?target&#x3D;\&quot;(?&lt;target&gt;.*?)\&quot;&gt;.*&lt;&#x2F;a&gt;&quot;,
+                                  RegexOptions.Singleline);
+                article.AuthorUrl &#x3D; regex.Match(item.Value).Groups[&quot;href&quot;].Value;
+                string urlTarget &#x3D; regex.Match(item.Value).Groups[&quot;target&quot;].Value;
+
+                &#x2F;&#x2F;取文章简介
+                &#x2F;&#x2F;1 先取summary Div中所有内容
+                regex &#x3D; new Regex(&quot;&lt;p class&#x3D;\&quot;post_item_summary\&quot;&gt;(?&lt;summary&gt;.*)&lt;&#x2F;p&gt;&quot;, RegexOptions.Singleline);
+                string summary &#x3D; regex.Match(item.Value).Groups[&quot;summary&quot;].Value;
+                &#x2F;&#x2F;2 取简介
+                regex &#x3D; new Regex(&quot;(?&lt;indroduct&gt;(?&lt;&#x3D;&lt;&#x2F;a&gt;).*)&quot;, RegexOptions.Singleline);
+                article.AritcleInto &#x3D; regex.Match(summary).Groups[&quot;indroduct&quot;].Value;
+
+
+                &#x2F;&#x2F;取发布人与发布时间
+                regex &#x3D;
+                    new Regex(
+                        &quot;&lt;div class&#x3D;\&quot;post_item_foot\&quot;&gt;\\s*&lt;a.*?&gt;(?&lt;publishName&gt;.*)&lt;&#x2F;a&gt;(?&lt;publishTime&gt;.*)&lt;span class&#x3D;\&quot;article_comment\&quot;&gt;&quot;,
+                        RegexOptions.Singleline);
+                article.Author &#x3D; regex.Match(item.Value).Groups[&quot;publishName&quot;].Value;
+                article.PublishTime &#x3D; regex.Match(item.Value).Groups[&quot;publishTime&quot;].Value.Trim();
+
+                &#x2F;&#x2F;取评论数
+                regex &#x3D;
+                    new Regex(
+                        &quot;&lt;span class&#x3D;\&quot;article_comment\&quot;&gt;&lt;a.*&gt;(?&lt;comment&gt;.*)&lt;&#x2F;a&gt;&lt;&#x2F;span&gt;&lt;span class&#x3D;\&quot;article_view\&quot;&gt;&quot;,
+                        RegexOptions.Singleline);
+                article.CommentNum &#x3D; regex.Match(item.Value).Groups[&quot;comment&quot;].Value;
+
+                &#x2F;&#x2F;取阅读数
+                regex &#x3D; new Regex(&quot;&lt;span\\s*class&#x3D;\&quot;article_view\&quot;&gt;&lt;a.*&gt;(?&lt;readNum&gt;.*)&lt;&#x2F;a&gt;&quot;, RegexOptions.Singleline);
+                article.ReadNum &#x3D; regex.Match(item.Value).Groups[&quot;readNum&quot;].Value;
+                articleList.Add(article);
+            &#125;
+
+        &#125;
+        return articleList;
+    &#125;
+
+
+
+    public static string ClearSpecialTag(string htmlString)
+    &#123;
+
+        string htmlStr &#x3D; Regex.Replace(htmlString, &quot;\n&quot;, &quot;&quot;, RegexOptions.IgnoreCase);
+        htmlStr &#x3D; Regex.Replace(htmlStr, &quot;\t&quot;, &quot;&quot;, RegexOptions.IgnoreCase);
+        htmlStr &#x3D; Regex.Replace(htmlStr, &quot;\r&quot;, &quot;&quot;, RegexOptions.IgnoreCase);
+        htmlStr &#x3D; Regex.Replace(htmlStr, &quot;\&quot;&quot;, &quot;&#39;&quot;, RegexOptions.IgnoreCase);
+        return htmlStr;
+    &#125;
+&#125;
+
+public class Article
+&#123;
+    &#x2F;&#x2F;&#x2F; &lt;summary&gt;
+    &#x2F;&#x2F;&#x2F; 文章标题
+    &#x2F;&#x2F;&#x2F; &lt;&#x2F;summary&gt;
+    public string AritcleTitle &#123; get; set; &#125;
+    &#x2F;&#x2F;&#x2F; &lt;summary&gt;
+    &#x2F;&#x2F;&#x2F; 文章链接
+    &#x2F;&#x2F;&#x2F; &lt;&#x2F;summary&gt;
+    public string AritcleUrl &#123; get; set; &#125;
+    &#x2F;&#x2F;&#x2F; &lt;summary&gt;
+    &#x2F;&#x2F;&#x2F; 文章简介
+    &#x2F;&#x2F;&#x2F; &lt;&#x2F;summary&gt;
+    public string AritcleInto &#123; get; set; &#125;
+    &#x2F;&#x2F;&#x2F; &lt;summary&gt;
+    &#x2F;&#x2F;&#x2F; 作者名
+    &#x2F;&#x2F;&#x2F; &lt;&#x2F;summary&gt;
+    public string Author &#123; get; set; &#125;
+    &#x2F;&#x2F;&#x2F; &lt;summary&gt;
+    &#x2F;&#x2F;&#x2F; 作者地址
+    &#x2F;&#x2F;&#x2F; &lt;&#x2F;summary&gt;
+    public string AuthorUrl &#123; get; set; &#125;
+    &#x2F;&#x2F;&#x2F; &lt;summary&gt;
+    &#x2F;&#x2F;&#x2F; 作者图片
+    &#x2F;&#x2F;&#x2F; &lt;&#x2F;summary&gt;
+    public string AuthorImg &#123; get; set; &#125;
+    &#x2F;&#x2F;&#x2F; &lt;summary&gt;
+    &#x2F;&#x2F;&#x2F; 发布时间
+    &#x2F;&#x2F;&#x2F; &lt;&#x2F;summary&gt;
+    public string PublishTime &#123; get; set; &#125;
+    &#x2F;&#x2F;&#x2F; &lt;summary&gt;
+    &#x2F;&#x2F;&#x2F; 推荐数
+    &#x2F;&#x2F;&#x2F; &lt;&#x2F;summary&gt;
+    public string DiggNum &#123; get; set; &#125;
+
+    &#x2F;&#x2F;&#x2F; &lt;summary&gt;
+    &#x2F;&#x2F;&#x2F; 评论数
+    &#x2F;&#x2F;&#x2F; &lt;&#x2F;summary&gt;
+    public string CommentNum &#123; get; set; &#125;
+    &#x2F;&#x2F;&#x2F; &lt;summary&gt;
+    &#x2F;&#x2F;&#x2F; 阅读数
+    &#x2F;&#x2F;&#x2F; &lt;&#x2F;summary&gt;
+    public string ReadNum &#123; get; set; &#125;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<br/>
+
+<p> 正则部分可能写得不很完美，但至少也匹配出来了，另外因为自己也是刚接触正则，也只能写出这种比较简单的正则。还望大家海涵~~</p>
+ <br/>
+
+<h3 id="五-总结"><a href="#五-总结" class="headerlink" title="五   总结"></a>五   总结</h3><br/>
+
+<p>　　正则其实并不难，了解每个符号的意思后，自己马上动手试一试多写几次自然就明白了，正则是出了名的坑多，随便少写了个点就匹配不到数据了，我也踩了很多坑，踩着踩着就踩出经验了。</p>
+<p>本文也只是对正则做了很基本的介绍，还有很多正则的字符没有介绍，只是写了比较常用的一些。如有错误之处，还望在评论中指出，我会马上修改。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">陈鑫扬</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://chenxinyang621.github.io/2021/03/05/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">https://chenxinyang621.github.io/2021/03/05/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">陈鑫扬</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/php/">
+                                    <span class="chip bg-color">php</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'H9Or8JxcbseGkXJwwHUsNuEs-MdYXbMMI',
+        appKey: 'zNlJB7GXsr7f2fC4wshrUOGB',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'glad to see your comment'
+    });
+</script>
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2021/03/07/c-%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="c++ 类和对象">
+                        
+                        <span class="card-title">c++ 类和对象</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            有手就行(x
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-07
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/c/">
+                        <span class="chip bg-color">c++</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/03/04/c-%E5%BC%95%E7%94%A8%E3%80%81%E9%87%8D%E8%BD%BD%E5%92%8C%E5%87%BD%E6%95%B0%E6%A8%A1%E5%9E%8B/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="c++ 引用、重载、模型和名称空间">
+                        
+                        <span class="card-title">c++ 引用、重载、模型和名称空间</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            在程序设计周结束前多水点博客
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-04
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/c/">
+                        <span class="chip bg-color">c++</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 陈鑫扬的第一个hexo博客<br />'
+            + '文章作者: 陈鑫扬<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">陈鑫扬</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2021";
+                    var startMonth = "2";
+                    var startDate = "12";
+                    var startHour = "15";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/ChenXinYang621" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1580779474@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1580779474" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1580779474" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="https://www.zhihu.com/people/gu-du-xing-54-82" class="tooltipped" target="_blank" data-tooltip="关注我的知乎: https://www.zhihu.com/people/gu-du-xing-54-82" data-position="top" data-delay="50">
+        <i class="fab fa-zhihu1">知</i>
+    </a>
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
